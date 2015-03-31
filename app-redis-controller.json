@@ -1,0 +1,36 @@
+{
+    "apiVersion": "v1beta1",
+    "desiredState": {
+        "podTemplate": {
+            "desiredState": {
+                "manifest": {
+                    "containers": [
+                        {
+                            "image": "dockerfile/redis",
+                            "name": "app-redis",
+                            "ports": [
+                                {
+                                    "containerPort": 6379
+                                }
+                            ]
+                        }
+                    ],
+                    "id": "redis-master",
+                    "version": "v1beta1"
+                }
+            },
+            "labels": {
+                "name": "app-redis"
+            }
+        },
+        "replicaSelector": {
+            "name": "app-redis"
+        },
+        "replicas": 1
+    },
+    "id": "app-redis",
+    "kind": "ReplicationController",
+    "labels": {
+        "name": "app-redis"
+    }
+}

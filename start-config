@@ -1,0 +1,44 @@
+#!/bin/bash
+set -e
+
+DIR=/conf/stack/
+mkdir -p $DIR
+
+CONFIG=$DIR/config.yaml
+
+
+APP_SECRET_KEY=${APP_SECRET_KEY:-0123456789abcdef}
+
+cat <<EOF > $CONFIG
+AUTHENTICATION_TYPE: Database
+BUILDLOGS_REDIS: {host: ${APP_REDIS_SERVICE_HOST}, port: ${APP_REDIS_SERVICE_PORT}}
+DB_URI: mysql+pymysql://${DB_USER}:${DB_PASSWORD}@${APP_MYSQL_SERVICE_HOST}/${DB_NAME}
+DISTRIBUTED_STORAGE_CONFIG:
+  local:
+  - LocalStorage
+  - {storage_path: /datastorage/registry}
+DISTRIBUTED_STORAGE_PREFERENCE: [local]
+ENTERPRISE_LOGO_URL: /static/img/quay-logo.png
+FEATURE_BUILD_SUPPORT: false
+FEATURE_MAILING: false
+FEATURE_USER_CREATION: true
+FEATURE_USER_LOG_ACCESS: true
+GITHUB_LOGIN_CONFIG: {}
+GITHUB_TRIGGER_CONFIG: {}
+PREFERRED_URL_SCHEME: http
+SECRET_KEY: '${APP_SECRET_KEY}'
+SERVER_HOSTNAME: ${APP_WEB_SERVICE_HOST}
+SETUP_COMPLETE: true
+SUPER_USERS: [root]
+TESTING: false
+USERFILES_LOCATION: local
+USERFILES_PATH: userfiles/
+USER_EVENTS_REDIS: {host: ${APP_REDIS_SERVICE_HOST}, port: ${APP_REDIS_SERVICE_PORT}}
+USE_CDN: false
+EOF
+
+
+cat $CONFIG
+
+# HACK to stay around after generating config
+while true; do sleep 86400; done

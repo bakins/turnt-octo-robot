@@ -1,0 +1,91 @@
+{
+    "apiVersion": "v1beta1",
+    "desiredState": {
+        "podTemplate": {
+            "desiredState": {
+                "manifest": {
+                    "volumes": [
+                        {
+                            "name": "storage",
+                            "source": {
+                                "hostDir":{
+                                    "path": "/home/core/storage"
+                                }
+                            }
+                        },
+                        {
+                            "name": "config",
+                            "source": {
+                                "emptyDir":{
+                                }
+                            }
+                        }
+                    ],
+                    "containers": [
+                        {
+                            "image": "quay.io/bakins/turnt-octo-robot",
+                            "name": "turnt-octo-robot",
+                            "volumeMounts": [
+                                {
+                                    "name": "config",
+                                    "mountPath": "/conf/stack"
+                                }
+                            ],
+                            "env": [
+                                {
+                                    "name": "DB_USER",
+                                    "value": "coreosuser"
+                                },
+                                {
+                                    "name": "DB_PASSWORD",
+                                    "value": "password"
+                                },
+                                {
+                                    "name": "DB_NAME",
+                                    "value": "enterpriseregistrydb"
+                                }
+                            ],
+                        },
+                        {
+                            "image": "quay.io/quay/quay:4f04ad2",
+                            "name": "app-web",
+                            "privileged": true,
+                            "volumeMounts": [
+                                {
+                                    "name": "storage",
+                                    "mountPath": "/datastorage"
+                                },
+                                 {
+                                    "name": "config",
+                                    "mountPath": "/conf/stack"
+                                }
+
+                            ],
+                            "ports": [
+                                {
+                                    "containerPort": 80,
+                                    "name": "http-server"
+                                }
+                            ]
+                        }
+                    ],
+                    "id": "app-web",
+                    "version": "v1beta1"
+                }
+            },
+            "labels": {
+                "app": "app-web",
+                "name": "app-web"
+            },
+        },
+        "replicaSelector": {
+            "name": "app-web"
+        },
+        "replicas": 1
+    },
+    "id": "app-web-controller",
+    "kind": "ReplicationController",
+    "labels": {
+        "name": "app-web"
+    }
+}

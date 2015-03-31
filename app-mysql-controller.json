@@ -1,0 +1,54 @@
+{
+    "apiVersion": "v1beta1",
+    "desiredState": {
+        "podTemplate": {
+            "desiredState": {
+                "manifest": {
+                    "containers": [
+                        {
+                            "image": "mysql:5.7",
+                            "name": "app-mysql",
+                            "ports": [
+                                {
+                                    "containerPort": 3306
+                                }
+                            ],
+                            "env": [
+                                {
+                                    "name": "MYSQL_ROOT_PASSWORD",
+                                    "value": "root_password"
+                                },
+                                {
+                                    "name": "MYSQL_USER",
+                                    "value": "coreosuser"
+                                },
+                                {
+                                    "name": "MYSQL_PASSWORD",
+                                    "value": "password"
+                                },
+                                {
+                                    "name": "MYSQL_DATABASE",
+                                    "value": "enterpriseregistrydb"
+                                }
+                            ]
+                        }
+                    ],
+                    "id": "mysql-master",
+                    "version": "v1beta1"
+                }
+            },
+            "labels": {
+                "name": "app-mysql"
+            }
+        },
+        "replicaSelector": {
+            "name": "app-mysql"
+        },
+        "replicas": 1
+    },
+    "id": "app-mysql",
+    "kind": "ReplicationController",
+    "labels": {
+        "name": "app-mysql"
+    }
+}
