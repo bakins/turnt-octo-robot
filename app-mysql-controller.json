@@ -20,7 +20,7 @@
                                 },
                                 {
                                     "name": "MYSQL_USER",
-                                    "value": "coreosuser"
+                                    "value": "myuser"
                                 },
                                 {
                                     "name": "MYSQL_PASSWORD",
@@ -28,7 +28,7 @@
                                 },
                                 {
                                     "name": "MYSQL_DATABASE",
-                                    "value": "enterpriseregistrydb"
+                                    "value": "appdatabase"
                                 }
                             ]
                         }
