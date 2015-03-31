@@ -34,7 +34,7 @@
                             "env": [
                                 {
                                     "name": "DB_USER",
-                                    "value": "coreosuser"
+                                    "value": "myuser"
                                 },
                                 {
                                     "name": "DB_PASSWORD",
@@ -42,12 +42,12 @@
                                 },
                                 {
                                     "name": "DB_NAME",
-                                    "value": "enterpriseregistrydb"
+                                    "value": "appdatabase"
                                 }
                             ],
                         },
                         {
-                            "image": "quay.io/quay/quay:4f04ad2",
+                            "image": "<IMAGE>",
                             "name": "app-web",
                             "privileged": true,
                             "volumeMounts": [
