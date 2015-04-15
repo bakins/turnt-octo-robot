@@ -1,13 +1,17 @@
 {
-    "apiVersion": "v1beta1",
-    "containerPort": 6379,
-    "id": "app-redis",
+    "apiVersion": "v1beta3",
     "kind": "Service",
-    "labels": {
+    "metadata": {
+        "labels": {
+            "name": "app-redis"
+        },
         "name": "app-redis"
     },
-    "port": 6379,
-    "selector": {
-        "name": "app-redis"
+    "spec": {
+        "port": 6379,
+        "protocol": "TCP",
+        "selector": {
+            "name": "app-redis"
+        }
     }
 }
