@@ -1,13 +1,17 @@
 {
-    "apiVersion": "v1beta1",
-    "containerPort": 3306,
-    "id": "app-mysql",
+    "apiVersion": "v1beta3",
     "kind": "Service",
-    "labels": {
+    "metadata": {
+        "labels": {
+            "name": "app-mysql"
+        },
         "name": "app-mysql"
     },
-    "port": 3306,
-    "selector": {
-        "name": "app-mysql"
+    "spec": {
+        "port": 3306,
+        "protocol": "TCP",
+        "selector": {
+            "name": "app-mysql"
+        }
     }
 }

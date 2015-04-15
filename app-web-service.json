@@ -1,13 +1,17 @@
 {
-    "apiVersion": "v1beta1",
-    "containerPort": 80,
-    "id": "app-web",
+    "apiVersion": "v1beta3",
     "kind": "Service",
-    "labels": {
+    "metadata": {
+        "labels": {
+            "name": "app-web"
+        },
         "name": "app-web"
     },
-    "port": 80,
-    "selector": {
-        "name": "app-web"
+    "spec": {
+        "port": 80,
+        "protocol": "TCP",
+        "selector": {
+            "name": "app-web"
+        }
     }
 }
